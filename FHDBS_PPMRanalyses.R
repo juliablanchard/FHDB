@@ -21,26 +21,28 @@ scinames<-c("HIPPOGLOSSOIDES PLATESSOIDES",
             "GADUS MORHUA",
             "CLUPEA HARENGUS",
             "HIPPOGLOSSUS HIPPOGLOSSUS",
-            "SEBASTES",
+            "SEBASTES FASCIATUS",
             "REINHARDTIUS HIPPOGLOSSOIDES",
             "MELANOGRAMMUS AEGLEFINUS",
-            "AMMODYTES",
+            "AMMODYTES AMERICANUS",
             "MERLUCCIUS BILINEARIS",
             "SQUALUS ACANTHIAS",
             "UROPHYCIS TENUIS",
             "GLYPTOCEPHALUS CYNOGLOSSUS",
-            "PLEURONECTES FERRUGINEA"
+            "MYZOPSETTA FERRUGINEA"
             )
 
 
 sub_pdpylen<-rbind(filter(pdpylen,SCINAME==scinames),
                    filter(pdpylen,grepl('AMMODYTES', SCINAME, ignore.case = TRUE)),
-                   filter(pdpylen,grepl('SEBASTES', SCINAME, ignore.case = TRUE)))
+                   filter(pdpylen,grepl('SEBASTES', SCINAME, ignore.case = TRUE)),
+                   filter(pdpylen,grepl('LIMANDA', SCINAME, ignore.case = TRUE))
+                   )
 unique(sub_pdpylen$SCINAME)
 
 
 #convert prey length to cm
-sub_pdpylen$PYLEN <-sub_pdpylen$PYLEN*100
+sub_pdpylen$PYLEN <-sub_pdpylen$PYLEN/100
 
 #save subset file
 write.csv(sub_pdpylen,"predpreylengths.csv")
